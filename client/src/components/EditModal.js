@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import { useDispatch } from 'react-redux';
 import {
   Button,
   Modal,
@@ -10,11 +11,21 @@ import {
   Label,
   Input,
 } from "reactstrap";
+import{editContact} from "../redux/actions/contactActions"
 
-function EditModal() {
+function EditModal({contact}) {
   const[modal,setModal]=useState(false)
+  const [name,setName]=useState(contact.name)
+  const[email,setEmail]=useState(contact.email)
+  const[phone,setPhone]=useState(contact.phone)
+  
   const toggle=()=>{
     setModal(!modal)
+  }
+  const dispatch=useDispatch()
+  const editt=()=>{
+    dispatch(editContact(contact._id,{name,email,phone}))
+    toggle()
   }
   return (
     <div>
@@ -28,8 +39,8 @@ function EditModal() {
           <FormGroup>
             <Label for="exampleEmail">Email</Label>
             <Input
-             
-             
+             onChange={(e)=>setEmail(e.target.value)}
+             value={email}
               type="email"
               name="email"
               id="exampleEmail"
@@ -39,7 +50,8 @@ function EditModal() {
           <FormGroup>
             <Label for="examplePassword">name</Label>
             <Input
-             
+            onChange={(e)=>setName(e.target.value)}
+             value={name}
               type="text"
               name="password"
               id="examplePassword"
@@ -49,7 +61,8 @@ function EditModal() {
           <FormGroup>
             <Label for="examplePassword">phone</Label>
             <Input
-              
+            onChange={(e)=>setPhone(e.target.value)}
+              value={phone}
               type="text"
               name="password"
               id="examplePassword"
@@ -59,7 +72,7 @@ function EditModal() {
         </Form>
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" >
+        <Button color="primary" onClick={editt}>
           save
         </Button>{" "}
         <Button color="secondary" onClick={toggle}>

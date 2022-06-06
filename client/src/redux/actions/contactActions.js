@@ -15,3 +15,8 @@ export const deleteContact=(idContact)=>(dispatch)=>{
     .then((res)=>dispatch(getContacts()))
     .catch((err)=>console.log(err))
 }
+export const editContact=(idContact,editedContact)=>(dispatch)=>{
+    axios.put(`/api/contacts/edit/${idContact}`,editedContact)
+    .then((res)=>dispatch(getContacts()))
+    .catch((err)=>console.log(err))
+}

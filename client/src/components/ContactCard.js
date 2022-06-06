@@ -26,7 +26,7 @@ function ContactCard({contact}) {
         </CardText>
         <div style={{display:"flex",justifyContent:"space-between"}} >
           <Button onClick={delet}>Delete</Button>
-          <EditModal />
+          <EditModal contact={contact}/>
         </div>
     </Card>
     </div>
